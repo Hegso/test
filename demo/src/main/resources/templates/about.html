@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+
+
+<head>
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+</head>
+
+<body class="container">
+
+<header th:insert="blocks/header :: header"></header>
+
+<div class="row sign">
+    <!--Тело-->
+    <div class="col-8">
+
+    </div>
+
+    <!--Форма login-->
+    <div class="col" th:insert="blocks/reg :: reg"></div>
+
+</div>
+
+
+
+
+
+</body>
+
+
+<div th:insert="blocks/footer :: footer"></div>
+
+
+</html>
+
+
+
+
+
+</body>
+</html>
+

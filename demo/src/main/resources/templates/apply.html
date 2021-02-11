@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+
+<body class="container">
+
+    <header th:insert = "blocks/header :: header"></header>
+
+<div class="row sign">
+    <div class="col-8">
+
+        <span th:each = "usr: ${usr}">
+        <span th:if="${usr.username == logUser}">
+
+                <div class="col shadow-sm text-center ">
+                    <h3 class="ont-weight-bolder">Новое обращение</h3>
+                </div>
+
+                <div class="col shadow-sm text-info text-center ">
+                    <p class="font-weight-bolder">Перед отправкой, убедитесь что все поля заполнены правильно.</p>
+                </div>
+
+                <form th:action="apply" class="needs-validation" method="post">
+
+                    <div class="row g-3">
+                        <!--Имя-->
+                        <div class="col-sm-6">
+                            <svg class="card-top shadow" width="100%" height="25">
+                                <rect width="100%" height="100%" fill="#55595c"></rect>
+                                <text x="43%" y="50%" fill="#eceeef" dy=".3em">Имя</text>
+                            </svg>
+                            <input type="text" name="firstName" class="form-control form-control-sm" id="firstName"  th:value="${usr.firstName}" readonly>
+                        </div>
+
+                        <!--Фамилия-->
+                        <div class="col-sm-6">
+                            <svg class="card-top shadow" width="100%" height="25">
+                                <rect width="100%" height="100%" fill="#55595c"></rect>
+                                <text x="38%" y="50%" fill="#eceeef" dy=".3em">Фамилия</text>
+                            </svg>
+                            <input type="text" name="lastName" class="form-control form-control-sm" id="lastName" th:value="${usr.lastName}" readonly>
+                        </div>
+                        <!--Login-->
+                        <div class="col-sm-6">
+                            <svg class="card-top shadow" width="100%" height="25">
+                                <rect width="100%" height="100%" fill="#55595c"></rect>
+                                <text x="41%" y="50%" fill="#eceeef" dy=".3em">Логин</text>
+                            </svg>
+                            <input type="text" name="lgn" class="form-control form-control-sm" id="lgn" th:value="${usr.username}" readonly>
+                        </div>
+                        <!--Email-->
+                        <div class="col-sm-6">
+                            <svg class="card-top shadow" width="100%" height="25">
+                                <rect width="100%" height="100%" fill="#55595c"></rect>
+                                <text x="41%" y="50%" fill="#eceeef" dy=".3em">Почта</text>
+                            </svg>
+                            <input type="email" name="email" class="form-control form-control-sm" id="email" th:value="${usr.email}" readonly>
+                        </div>
+                        <!--Характер обращения-->
+                        <div class="col-12">
+                            <svg class="card-top shadow" width="100%" height="25">
+                                <rect width="100%" height="100%" fill="#55595c"></rect>
+                                <text x="38%" y="50%" fill="#eceeef" dy=".3em">Характер обращения</text>
+                            </svg>
+                            <select class="form-control form-control-sm" name="typText" id="typText" required = "">
+                                <option value = "">Характер обращения</option>
+                                <option value = "Вопрос">Вопрос</option>
+                                <option value = "Предложение">Предложение</option>
+                                <option value = "Отзыв">Отзыв</option>
+                            </select>
+                            <div class="invalid-feedback">Выбирите характер обращения</div>
+                        </div>
+                        <!--Текст обращения-->
+                        <div class="col-12">
+                            <svg class="card-top shadow" width="100%" height="25">
+                                <rect width="100%" height="100%" fill="#55595c"></rect>
+                                <text x="43%" y="50%" fill="#eceeef" dy=".3em">Сообщение</text>
+                            </svg>
+                            <textarea class="form-control form-control-sm" name="text" id="text" rows="10" required placeholder="Сообщение"></textarea>
+                        </div>
+
+                    </div>
+
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <button class="w-100 btn btn-success btn-sm" type="submit">Отправить</button>
+
+                </form>
+
+        </span>
+        </span>
+    </div>
+
+    <!--Форма login-->
+    <div class="col" th:insert="blocks/reg :: reg"></div>
+
+</div>
+
+
+
+    <hr class="my-4">
+
+
+
+
+
+
+
+
+
+
+
+<div th:insert = "blocks/footer :: footer"></div>
+
+</body>
+</html>
+

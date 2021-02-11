@@ -1,0 +1,151 @@
+<div th:fragment = "reg">
+
+        <!-- !isAuthenticated() -->
+        <div sec:authorize="!isAuthenticated()">
+
+            <form th:action="@{/login}" method="post">
+
+                <div class="card bg-light border shadow">
+                    <svg class="card-top shadow" height="30">
+                        <rect width="100%" height="100%" fill="#55595c"></rect>
+                        <text x="40%" y="50%"  fill="#eceeef" dy=".3em" th:text="Вход"></text>
+                    </svg>
+                    <!--Логин-->
+                    <div class="row-2">
+                        <svg class="card-top shadow" width="100%" height="25">
+                            <rect width="100%" height="100%" fill="#95918c"></rect>
+                            <text x="38%" y="50%" fill="#eceeef" dy=".3em">Логин</text>
+                        </svg>
+
+                        <input type="username" name="username" class="form-control form-control-sm" placeholder="Логин" required/>
+                    </div>
+                    <!--Пароль-->
+                    <div class="row-2">
+                        <svg class="card-top shadow" width="100%" height="25">
+                            <rect width="100%" height="100%" fill="#95918c"></rect>
+                            <text x="37%" y="50%" fill="#eceeef" dy=".3em">Пароль</text>
+                        </svg>
+
+                        <input type="password" name="password" class="form-control form-control-sm" id="password" placeholder="Пароль" required/>
+                    </div>
+
+                    <p></p>
+                    <!--Вход-->
+                    <div class="col">
+                        <input class="col btn btn-success btn-sm" type="submit" value="Войти"/>
+                    </div>
+
+                    <p></p>
+                    <!--Регистрация-->
+                    <div class="col">
+                        <a href="/registration" class="w-100 col btn btn-success btn-sm">Регистрация</a>
+                    </div>
+
+                    <p></p>
+                </div>
+
+                <div class="col text-center">
+                    <small class="text-muted">Войдите под своим логином или зарегистрируйтесь</small>
+                </div>
+
+            </form>
+        </div>
+        <!-- isAuthenticated() -->
+        <div sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" method="post">
+
+                <div class="card bg-light border shadow">
+                    <svg class="card-top shadow  text-center" height="30">
+                        <rect width="100%" height="100%" fill="#55595c"></rect>
+                        <text x="30%" y="50%"  fill="#eceeef" dy=".3em">Добро пожаловать</text>
+                    </svg>
+                    <!--Role-->
+
+                    <!--Username-->
+                    <div class="row-2">
+                        <svg class="card-top shadow text-center" width="100%" height="25">
+                            <rect width="100%" height="100%" fill="#95918c"></rect>
+                            <text x="45%" y="50%" fill="#eceeef" dy=".3em" sec:authentication="name"></text>
+                        </svg>
+                    </div>
+
+                    <p></p>
+                    <!--Выйти-->
+                    <div class="col">
+                        <form th:action="@{/logout}" method="post">
+                            <input class="col btn btn-secondary btn-sm" type="submit" value="Выйти"/>
+                        </form>
+                    </div>
+
+                    <p></p>
+                </div>
+            </form>
+        </div>
+
+</div>
+
+
+<div th:fragment = "regErr">
+
+    <!-- !isAuthenticated() -->
+    <div sec:authorize="!isAuthenticated()">
+
+        <form th:action="@{/login}" method="post">
+
+            <div class="card bg-light border border-danger shadow">
+                <svg class="card-top shadow" height="30">
+                    <rect width="100%" height="100%" fill="#55595c"></rect>
+                    <text x="40%" y="50%"  fill="#eceeef" dy=".3em" th:text="Вход"></text>
+                </svg>
+                <!--Логин-->
+                <div class="row-2">
+                    <svg class="card-top shadow" width="100%" height="25">
+                        <rect width="100%" height="100%" fill="#95918c"></rect>
+                        <text x="38%" y="50%" fill="#eceeef" dy=".3em">Логин</text>
+                    </svg>
+
+                    <input type="username" name="username" class="form-control form-control-sm" placeholder="Логин" required/>
+                </div>
+                <!--Пароль-->
+                <div class="row-2">
+                    <svg class="card-top shadow" width="100%" height="25">
+                        <rect width="100%" height="100%" fill="#95918c"></rect>
+                        <text x="37%" y="50%" fill="#eceeef" dy=".3em">Пароль</text>
+                    </svg>
+
+                    <input type="password" name="password" class="form-control form-control-sm" id="password" placeholder="Пароль" required/>
+                </div>
+
+                <p></p>
+                <!--Вход-->
+                <div class="col">
+                    <input class="col btn btn-success btn-sm" type="submit" value="Войти"/>
+                </div>
+
+                <p></p>
+                <!--Регистрация-->
+                <div class="col">
+                    <a href="/registration" class="col btn btn-success btn-sm">Регистрация</a>
+                </div>
+
+                <p></p>
+            </div>
+
+            <div class="col text-center">
+                <small class="text-danger">Войдите под своим логином или зарегистрируйтесь</small>
+            </div>
+
+            <span th:if="${param.error}" align="center" class="text-danger">
+                <div class="col text-center">
+                    <small class="text-danger">Неправильный логин или пароль</small>
+                </div>
+            </span>
+            <span th:if="${param.logout}" align="center" class="text-danger">
+                <div class="col text-center">
+                    <small class="text-danger">Вы вышли из системы</small>
+                </div>
+            </span>
+
+        </form>
+    </div>
+</div>

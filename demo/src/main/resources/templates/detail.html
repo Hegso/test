@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+
+
+<head>
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+</head>
+
+<body class="container">
+
+<header th:insert="blocks/header :: header"></header>
+
+<div class="row sign">
+    <!--Тело-->
+    <div class="col-8">
+
+
+        <!--message-->
+        <span th:each = "mess: ${messages}"
+              th:if="${mess.lgn == logUser}">
+
+              <div class="card shadow">
+                  <svg class="card-top shadow" height="30">
+                    <rect width="100%" height="100%" fill="#55595c"></rect>
+                    <text x="2%" y="50%" fill="#eceeef" dy=".3em" th:text="${mess.typText}"></text>
+                  </svg>
+
+                  <div class="d-flex justify-content-between border">
+                      <small class="col text-muted" th:text = "${mess.firstName} + ' ' + ${mess.lastName}"></small>
+                  </div>
+
+                  <div class="card-body shadow-sm">
+                      <text class="card-text" th:text="${mess.text}"></text>
+                  </div>
+
+                  <div class="d-flex justify-content-between border">
+
+                      <form class="col-6 text-left align-text-bottom" th:action = "'/red/' + ${mess.id} + '/remove'">
+                      <a th:href="'/red/' + ${mess.id}" class="btn btn-link btn-sm text-left align-text-bottom text-primary font-weight-bold">редактировать</a>
+                      </form>
+
+                      <form class="col-6 text-right align-text-bottom" th:action = "'/red/' + ${mess.id} + '/remove'" method="post">
+                        <button type="submit" class="btn btn-link btn-sm text-danger font-weight-bold">удалить</button>
+                      </form>
+                  </div>
+              </div>
+              <hr>
+
+        </span>
+            <a th:href="apply" class="w-100 btn btn-success btn-sm">Добавить обращение</a>
+
+
+
+
+    </div>
+
+    <!--Форма login-->
+    <div class="col" th:insert="blocks/reg :: reg"></div>
+
+</div>
+
+
+
+
+
+</body>
+
+
+<div th:insert="blocks/footer :: footer"></div>
+
+
+</html>
+
